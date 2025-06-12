@@ -15,6 +15,8 @@ public class Main {
                 new AmountDiscountPolicy() // 객체를 생성하는 시점에 DiscountPolicy를 결정
         );
 
+        avatar.changeDiscountPolicy(new PercentDiscountPolicy()); // 유연하게 할인 정책을 변경할 수 있는 구조로 개선
+
         // 즉, 컴파일 시간 의존성과 실행 시간 의존성을 다르게 설계할 수 있다는 것
 
         Movie avengers = new Movie(

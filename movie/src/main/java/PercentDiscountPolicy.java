@@ -3,7 +3,7 @@
  *
  * @author Seungjo, Jeong
  */
-public class PercentDiscountPolicy extends DiscountPolicy {
+public class PercentDiscountPolicy extends DefaultDiscountPolicy {
 
     private double percent;
 

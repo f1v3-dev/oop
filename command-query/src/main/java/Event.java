@@ -12,4 +12,27 @@ public class Event {
         this.from = from;
         this.duration = duration;
     }
+
+    public boolean isSatisfiedBy(RecurringSchedule schedule) {
+        if (from.getDayOfWeek() != schedule.getDayOfWeek() ||
+                !from.toLocalTime().equals(schedule.getFrom()) ||
+                !duration.equals(schedule.getDuration())) {
+            reschedule(schedule); // 명령과 쿼리가 분리되지 않은 경우이다.
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void reschedule(RecurringSchedule schedule) {
+        from = LocalDateTime.of(
+                from.toLocalDate().plusDays(daysDistance(schedule)),
+                schedule.getFrom());
+
+        duration = schedule.getDuration();
+    }
+
+    private long daysDistance(RecurringSchedule schedule) {
+        return schedule.getDayOfWeek().getValue() - from.getDayOfWeek().getValue();
+    }
 }
